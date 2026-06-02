@@ -2,17 +2,23 @@ from django.db import models
 
 # Create your models here.
 
+class Promotion(models.Model):
+    description = models.CharField(max_length=255)
+    discount = models.FloatField()
+
 class Collection(models.Model):
     title=models.CharField(max_length=255)
+    featured_product = models.ForeignKey('Product',on_delete=models.SET_NULL,null=True,related_name='+')
     
    
 class Product(models.Model):
     title=models.CharField(max_length=255)
     description=models.TextField()
-    price = models.DecimalField(max_length=6,decimal_places=2)
+    price = models.DecimalField(max_digits=6,decimal_places=2)
     inventory = models.IntegerField()
     last_update = models.DateTimeField(auto_now=True)
-    Collection=models.ForeignKey(Collection,on_delete=models.PROTECT)
+    collection=models.ForeignKey(Collection,on_delete=models.PROTECT)
+    promotions=models.ManyToManyField(Promotion,related_name='products')
 
 class Customer(models.Model):
 
@@ -39,7 +45,7 @@ class Order(models.Model):
     PAYMENT_STATUS_FAILED='F'
 
     PAYMENT_STATUS_CHOICES=[
-        (PAYMENT_STATUS_COMPLETE,'Pending'),
+        (PAYMENT_STATUS_PENDING,'Pending'),
         (PAYMENT_STATUS_COMPLETE,'Complete'),
         (PAYMENT_STATUS_FAILED,'Failed')
     ]
