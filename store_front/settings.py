@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'playground',
     'debug_toolbar',
     'tags',
-    'store'
+    'store',
+    'likes'
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,7 @@ INTERNAL_IPS = [
     # ...
 ]
 
-ROOT_URLCONF = 'storefront.urls'
+ROOT_URLCONF = 'store_front.urls'
 
 TEMPLATES = [
     {
@@ -77,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'storefront.wsgi.application'
+WSGI_APPLICATION = 'store_front.wsgi.application'
 
 
 # Database
