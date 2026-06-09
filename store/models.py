@@ -81,5 +81,12 @@ class CartItem(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     quantity=models.PositiveSmallIntegerField()
 
+class LocalAddress(models.Model):
+    street=models.CharField(max_length=255)
+    city=models.CharField(max_length=255)
+    state=models.CharField(max_length=255)
+    zip=models.CharField(max_length=10)
+
+    
 
 
